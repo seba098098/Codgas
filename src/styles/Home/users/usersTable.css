@@ -1,0 +1,86 @@
+.usersTableWrapper.desktop {
+    width: 100%;
+    overflow-x: auto;
+    background: inherit;
+    /* toma el mismo fondo del padre */
+    min-height: 100%;
+}
+
+.usersTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.usersTable th,
+.usersTable td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.usersTable th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.userAvatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ===============================
+   Mobile Cards
+   =============================== */
+.usersCardsWrapper.mobile {
+    display: none;
+    /* se activa solo en móvil */
+}
+
+.userCard {
+    width: 80%;
+    /* ocupa todo el contenedor */
+    max-width: 350px;
+    /* ancho máximo */
+    background: #5e4e4e2c;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.userCard .userAvatar {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+}
+
+.userCard .userInfo p {
+    margin: 2px 0;
+    font-size: 13px;
+}
+
+.userCard .userActions {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+/* ===============================
+   Media Queries
+   =============================== */
+@media (max-width: 600px) {
+    .usersTableWrapper.desktop {
+        display: none;
+    }
+
+    .usersCardsWrapper.mobile {
+        display: block;
+    }
+}
