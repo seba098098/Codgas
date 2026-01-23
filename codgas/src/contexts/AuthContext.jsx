@@ -3,6 +3,7 @@ import { authService } from '../services/auth';
 
 const AuthContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -11,22 +12,28 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      authService.getCurrentUser()
-        .then(userData => setUser(userData))
-        .catch(() => {
+    const initializeAuth = async () => {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        try {
+          const userData = await authService.getCurrentUser();
+          setUser(userData);
+        } catch {
           authService.logout();
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
   }, []);
 
   const login = async (email, password) => {
@@ -60,3 +67,5 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthProvider;

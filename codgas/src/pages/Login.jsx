@@ -30,7 +30,7 @@ const Login = () => {
     try {
       await login(formData.email, formData.password);
       navigate('/dashboard');
-    } catch (err) {
+    } catch {
       setError('Credenciales inválidas. Por favor intenta nuevamente.');
     } finally {
       setLoading(false);
